@@ -1,206 +1,211 @@
 
+<!--Aquest codi és un HTML i es diu index, html perquè tots els navegadors busquen inex.html per obrir-lo-->
 <!DOCTYPE html>
-<!--escrit en llengua html -->
+
 <html lang="ca">
+<!--La llengua emprada es català, si fos castellà seria "es" i angles "en"-->
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calcul de la posició d'un robot</title>
- <!-- Link és un codi html que permet unir o linkar arxius css. Els arxius CSS són conjunt de codi
- que ens permeten donar estil a la pàgina. CSS SIGNIFICA FULL D' ESTIL en cascada i permet donar marges al text,
- triar el tipus de lletra, triar el color de la lletra, el tamny de la lletra, el interlineat. En casacada vol dir
- que afecta a diverses pàgines, una darrere de l'altre. Les dues linies següents són CDM: Content Delivert Network, 
- es a dir una adreç d'internet on està una biblioteca amb  moltes instruccioms que ens ajuden a fer estils
- desplegables. Bootstrap permet fer menús, desplegables amb estil (la linea del 2). L a segona linea inclou la biblioteca 
- d' estils fonts awesome, perquè inclou fonts o tipus de lletra amb símbols i dibuixos amb icones. Si no poso 
- o m'oblido les dues lineas seguents no funcionarà algunes linies que estàn més endevant. Per exemple la linea 26 i 27
- no funcionara perquè dropdown iteam pertany a boostraP. Font awesome, si no afegim font-awesome la linea 93, 95, 96 no dibuixarien icones
- en el menú exemple: Fa-solid fa-code-->
-<script type="text/javascript" async
-src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
-</script>
-<style>
-body {
-font-family: Arial, sans-serif;
-margin: 20px;
-equation (
+<!--Head significa capçelera. Tots els codis de html tenen dos parts: head i body. En el head posem contingut que no veu l'usuari o es seundari per l'usuari-->
+  <meta charset="UTF-8">
+<!--Tot html ha de dir quin conjunt de caràcters o lletres que utilitzem. Això es una metainformació i per això posa meta,
+  utf-8 és el conjunt de caràcters que utilitzem, unicode text forma de 8 bits. Utf-8 inclou ç, accents oberts i tancats,
+Charset vol dir character set, és el "set" que vol dir conjunt de "characters" o caràcters o lletres.-->
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--El viewport és una metainformació dde com veiem la pàgina web i la veiem amb lo que diu dins de content o contigut.
+  Width=device-width significa que la amplada del nostre contingut serà igual a la amplada del dispositiu (device), acepta totes:
+  rellotge, mòbil, tauleta, pc, televisió, pantalla de cinema...Initial-scale és la escala inicial és 1.0, si fos 2.0 sortiria el doble de gran
+  -->
+  <title>Càlcul de la posició d'un robot</title>
+<!--Title és el títol de la pestanya i no és el títol del document-->
+  <script type="text/javascript" async
 
-margin: 20px 0;
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+<!-- Script és una etiqueta molt importatnt perquè ens indica hi ha després és javascript. La línia anterior carrega matnjax que ens permet que
+  surtin formules matemàtique boniques-->
+    
+  </script>
 
-1 results(
+  <style> /* Aquesta part del codi és CSS,que serveix per donar estil als elements html
+  El codi CSS sempre té la següent estructura. Comença amb una etiqueta html que volem modificar i donar estil,
+    a continuació es posa una clau "curly bracket" que engloba una o diverses línies amb la següent estructra:
+    propietat1:valor1; propietat2:valor2; etc. I s'acaba amb una clau tancada
+    Per exemple la línia 35 modificarà el body que es troba més a baix a la línia 77. Quines són les propietats?
+    font-family és la família del tipus de lletra o font. Hi ha tres famílies de lletres: sans-serif que significa sense 
+    serifa. Les serifes són adornaments o remats de les lletres. Les que tenen serifa s'anomenen serif. El tercer tipus és
+    monospace que significa que totes les lletres tenen el mateix ample i això és útil perquè el codi ho necessita.*/
 
-font-weight: bold;
+    body {
 
-Oculta els elements de sortida per defecte
+      font-family: Arial, sans-serif;
+    /* La línia anterior*/
+      margin: 20px;
+    /* Margin és el marge exterior.*/
 
-#output, #robotCanvas (
+    }
+    .equation { 
+      /* El punt que hi ha davant de equation significa que són de la mateixa classe "class=equation", s'utilitza a la línia 139 i fa que les equacions tinguin
+      20px més que el body només a dalt i a baix.*/
+      
+      margin: 20px 0;
+    }
+    .results {
+      /* És una classe que no s'utilita de moment, sortiria la lletra en negreta*/
 
-display: none;
+      font-weight: bold;
+    }
+    /* Oculta els elements de sortida per defecte */
 
-} canvas (
+    #output, #robotCanvas {
 
-border: 1px solid black;
+      display: none;
+/* Output i robotCanvas tenen un hastag davant */
+    }
+  canvas {
 
-</style>
+      border: 1px solid black;
+
+    }
+
+  </style>
 
 </head>
 
-<body> <h1>Calcul de la posició d'un robot amb dos braços</h1
+<body>
 
-<div>
+  <h1>Càlcul de la posició d'un robot amb dos braços</h1>
 
-<label for="a1">Longitud del primer braç (a,):</label>
+  <div>
 
-<input type="number" id =^ prime prime a1^ prime prime value="1" step="0.1"><br><br>
+    <label for="a1">Longitud del primer braç (a₁):</label>
 
-<label for="a2">Longitud del segon braç (a 2 ):</ 1at >
+    <input type="number" id="a1" value="1" step="0.1"><br><br>
+    <label for="a2">Longitud del segon braç (a₂):</label>
+    <input type="number" id="a2" value="0.5" step="0.1"><br><br>
+    <label for="q1">Angle del primer braç (q₁, en graus):</label>
+    <input type="number" id="q1" value="45" step="0.1"><br><br>
+    <label for="q2">Angle del segon braç (q₂, en graus):</label>
+    <input type="number" id="q2" value="30" step="0.1"><br><br>
+    <button onclick="calculatePosition()">Calcula la posició</button>
 
-<input type="number" id =^ prime prime a2^ prime prime value z ^ prime prime 0.5^ prime prime step="0.1"><br><br>
+  </div>
 
-<label for="q1">Angle del primer braç (q₁, en graus): </label>
+  <div id="output"></div>
 
-<input type="number" id =^ prime prime qT^ prime prime value= ^ prime prime 45 ^ prime prime step="0.1"><br><br>
-
-<label for="q2">Angle del segon braç ( q_{2} , en graus): </label>
-
-<input type="number" id =^ prime prime q2^ prime prime value="30" step="0.1"><br><br>
-
-<button onclick="calculatePosition()">Calcula la posició</button>
-
-</div>
-
-<div id="output"></div>
-
-<canvas id="robotCanvas" width =^ prime prime 400 ^ prime prime height="400"></canvas>
-
+  <canvas id="robotCanvas" width="400" height="400"></canvas>
 <script>
 
-function calculate Position() (
+function calculatePosition() {
 
-// Agafar les dades introduïdes per l'usuari
+  // Agafar les dades introduïdes per l'usuari
 
-let a * 1 = parseFloat(document.getElementById('al').value);
+  let a1 = parseFloat(document.getElementById('a1').value);
 
-let a * 2 = parseFloat(document.getElementById("a2").value);
+  let a2 = parseFloat(document.getElementById('a2').value);
 
+  let q1_deg = parseFloat(document.getElementById('q1').value); // Grados
 
-let q1 deg parseFloat(document.getElementById('q1').value); // Grados let 42 deg = parseFloat(document.getElementById(q2').value); // Grados
+  let q2_deg = parseFloat(document.getElementById('q2').value); // Grados
 
-let q1q1 deg Math.PI/180, // Convertir graus a radians
+  let q1 = q1_deg * Math.PI / 180; // Convertir graus a radians
 
-let q2q2 deg Math. P1/180; // Convertir graus a radians
-
-//**Mostrar els contenidors de sortida**
-
-document.getElementById("output').style.display = block; document.getElementById('robotCanvas).style.display = "block";
-
-//Fase 1: Fórmules
-
-let output = "<div class="equation'>Les equacions per calcular la posició final del robot són:</div>";
-
-output += "<div class="equation'> x=a\ 1|| cos(q, 1) +a\ 2||cos(q,1+q\ 2)||f</div>^ prime prime ; output += "<div class="equation'>[ div"; y =a\ 1||sin(q\ 1)+a\ 2
-
-//Fase 2: Substituir les variables
-
-output += "<div class='equation'>Substituint els valors:</div>";
-
-output += "<div class='equation'> [*= \mathfrak{S} \ a1)||cos( mathfrak S \ q1\ deg\ ^ )+ mathfrak S \ a2\ ||cos( mathfrak S \ q1\ deg\ ^ =
-
-+5(q2_deg)")]</div>';
-
-output += <div class='equation'>[ y=\$\ a1\ |sin(S\ q1\ deg)^ )+S\ aZ )||sin(\$\ q1\ deg)^
-
-+S{q2_deg)*)\\]</div>
-
-//Fase 3: Càlcul numeric detallat
-
-let x 1=a1 Math.cos(q1);
-
-let x 2=a2*Math.cos(q1+q2);
-
-let
-
-let y2a2 Math.sin(q1+ q2);
-
-outpur += "<div class='equation'>Desglossant els càlculs:</div>";
-
-output += "<div class='equation'>\\[x_1 = a_1\\cos(q_1)=${al} \\times \\cos(${q1_deg))
-
-=${x1.toFixed(2)) \\]</div>';
-
-output += "<div class='equation'>[ x \ 2=a\ 2 v cos(q\ 1+q\ 2)=S(a2) \\times \\cos($ (q1_deg)+${q2_deg)") = $(x2.toFixed(2)) ||]</ div >
-
-output += <div class='equation'>[y_1 = a_1\\sin(q_1)=${a1} \\times \\sin(${q1_deg)*) =${yl.toFixed(2)} \\]</div>';
-
-output <div class='equation'>\\[ \ 2 =a\ 2)lsin(q\ 1+q\ 2)=S(a2) \\times \sin($
-
-(q1_deg)+5(q2_deg)") $(y2.toFixed(2)) \\]</div>";
-
-//Resultat final
-
-let x =x1+x2,
-
-let y =y1+y2z
-
-output += "<div class='equation> Calculant els resultats numèrics totals:</div>";
-
-output <div class='equation'> x = 5f x.toFixed(2)) \\]</div>';
-
-output = <div class='equation> [ y = 5(y.toFixed(2)) \\]</div>";
-
-Mostrar el resultat
-
-document.getElementById("output').innerHTML = output;
-
-MathJax.typeset(); // Renderitzar MathJax per mostrar les fórmules correctament
-
-//Fase 4: Part gráfica
-
-let canvas document.getElementById('robotCanvas');
-
-let ctx canvas.getContext("2d');
+  let q2 = q2_deg * Math.PI / 180; // Convertir graus a radians
 
 
+  // **Mostrar els contenidors de sortida**
+
+  document.getElementById('output').style.display = 'block';
+
+  document.getElementById('robotCanvas').style.display = 'block';
 
 
+  // Fase 1: Fórmules
 
+  let output = "<div class='equation'>Les equacions per calcular la posició final del robot són:</div>";
 
-ctx.clearRect(0, 0, canvas.width, canvas.height); // Netejar canvas
+  output += "<div class='equation'>\\[ x = a_1 \\cos(q_1) + a_2 \\cos(q_1 + q_2) \\]</div>"
+  output += "<div class='equation'>\\[ y = a_1 \\sin(q_1) + a_2 \\sin(q_1 + q_2) \\]</div>";
 
-// Centre i escales
+  // Fase 2: Substituir les variables
+  output += "<div class='equation'>Substituïm els valors:</div>";
+  output += `<div class='equation'>\\[ x = ${a1} \\cos(${q1_deg}°) + ${a2} \\cos(${q1_deg}° + ${q2_deg}°) \\]</div>`;
+  output += `<div class='equation'>\\[ y = ${a1} \\sin(${q1_deg}°) + ${a2} \\sin(${q1_deg}° + ${q2_deg}°) \\]</div>`;
+  // Fase 3: Càlcul numèric detallat
+  let x1 = a1 * Math.cos(q1);
+  let x2 = a2 * Math.cos(q1 + q2);
+  let y1 = a1 * Math.sin(q1);
+  let y2 = a2 * Math.sin(q1 + q2);
 
-let centerX canvas.width/2; let centerY = canvas.height/2;
+  output += "<div class='equation'>Desglossant els càlculs:</div>";
 
+  output += `<div class='equation'>\\[ x_1 = a_1 \\cos(q_1) = ${a1} \\times \\cos(${q1_deg}°) = ${x1.toFixed(2)} \\]</div>`;
+
+  output += `<div class='equation'>\\[ x_2 = a_2 \\cos(q_1 + q_2) = ${a2} \\times \\cos(${q1_deg}° + ${q2_deg}°) = ${x2.toFixed(2)} \\]</div>`;
+
+  output += `<div class='equation'>\\[ y_1 = a_1 \\sin(q_1) = ${a1} \\times \\sin(${q1_deg}°) = ${y1.toFixed(2)} \\]</div>`;
+
+  output += `<div class='equation'>\\[ y_2 = a_2 \\sin(q_1 + q_2) = ${a2} \\times \\sin(${q1_deg}° + ${q2_deg}°) = ${y2.toFixed(2)} \\]</div>`;
+  // Resultat final
+
+  let x = x1 + x2;
+
+  let y = y1 + y2;
+  output += "<div class='equation'>Calculant els resultats numèrics totals:</div>";
+
+  output += `<div class='equation'>\\[ x = ${x.toFixed(2)} \\]</div>`;
+
+  output += `<div class='equation'>\\[ y = ${y.toFixed(2)} \\]</div>`;
+  // Mostrar el resultat
+  document.getElementById('output').innerHTML = output;
+  MathJax.typeset(); // Renderitzar MathJax per mostrar les fórmules correctament
+  // Fase 4: Part gràfica
+  let canvas = document.getElementById('robotCanvas');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // Netejar canvas
+  // Centre i escales
+
+  let centerX = canvas.width / 2;
+
+  let centerY = canvas.height / 2;
+
+  let scale = 80;
+  // Coordenades
+
+  let x1_screen = centerX + x1 * scale;
+
+  let y1_screen = centerY - y1 * scale;
+
+  let x2_screen = centerX + x * scale;
+
+  let y2_screen = centerY - y * scale;
+  // Dibuxar braç 1
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY);
+  ctx.lineTo(x1_screen, y1_screen);
+  ctx.strokeStyle = 'blue';
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  // Dibuxar braç 2
+  ctx.beginPath();
+  ctx.moveTo(x1_screen, y1_screen) 
+  ctx.lineTo(x2_screen, y2_screen);
+  ctx.strokeStyle = 'green'
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  // Dibuxar els cercles als extrems
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 5, 0, 2 * Math.PI); // Base del braç
+  ctx.fillStyle = 'red';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x1_screen, y1_screen, 5, 0, 2 * Math.PI); // Final del primer braç
+  ctx.fillStyle = 'red';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x2_screen, y2_screen, 5, 0, 2 * Math.PI); // Final del segon braç
+  ctx.fillStyle = 'red';
+  ctx.fill();
 }
-
-let scale = 80;
-
-// Coordenades
-
-let x1_screen = centerX + x1 scale; let y1 screen = centerY-y1 scale; let x2_screen = centerX + x scale; let y2_screen = centerY -y scale;
-
-// Dibuixar braç 1
-
-ctx.beginPath(); ctx.moveTo(centerX, centerY). ctx.lineTo(x1_screen, y1_screen); ctx.strokeStyle = 'blue'; ctx.lineWidth = 5; ctx.stroke();
-
-// Dibuixar braç 2 ctx.beginPath(); ctx.moveTo(x1_screen, y1_screen); ctx.lineTo(x2_screen, y2_screen); ctx.strokeStyle = 'green'; ctx.lineWidth = 5;
-
-ctx.stroke();
-
-// Dibuixar els cercles als extrems ctx.beginPath(); ctx.arc(centerX, centerY, 5, 0, 2 Math.PI); // Base del braç ctx.fillStyle = 'red';
-
-ctx.fill();
-
-ctx.beginPath(); ctx.arc(x1_screen, y1_screen, 5, 0, 2 Math.PI); // Final del primer braç ctx.fillStyle = 'red';
-
-ctx.fill();
-
-ctx.beginPath(); ctx.arc(x2_screen, y2_screen, 5, 0, 2 Math.PI); // Final del segon braç ctx.fillStyle = 'red';
-
-ctx.fill();
-
 </script>
-
 </body>
-
 </html>
