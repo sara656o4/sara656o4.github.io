@@ -30,26 +30,24 @@
     <style>
         /* ===== COLORS & ROOT VARIABLES ===== */
         :root{
-        /* Root, significa arrel en angles, es una paraula que s'utilitza molt en el món informàtic, per exemple el linux, que es un sistema operatiu
-            alternatiu i millor que el windows. En aques cas root és l'element que significa el document arrel del html, aquest és el propi html.
-            Antigament es deia html"{propietat: valor}, però es fa servir "root{--variable:valor}" perque té una prioritat més alta que html.
-            Perque tot els estils que estiguin dintre de root afectaran a tota la pàgina web html. Perque "--variablle" és una variable CSS global, que puc utilitzar vàries vegades.
-            Aquestes variables s'anomenen variables CSS personalitzades, o custom propieties. Per exemple la variable primary és un color que surt diverses vegades,
-            per exemple en botons d'aquest mateix color en el ons, en els títols, en àrees com header que es la capçalera principal. Això permet tenir el codi més organitzat, perquè
-            el canvio una vegada en el root i es canvia en diferents llocs a la vegada. També permet codis més coherents visualment, ja que és el mateix color, i és més
-            fàcil d'ampliar, com el mode fosc i clar.
-            El primary és el color principal de la web, en aquest són tons foscos per capçeleres i fons.
-            El secondary és un color secundari i s'aplica en enllaços i coses que li vols donar importància.
+            /* Significa arrel en angles, es una paraula que s'utilitza molt en el món informàtic, per exemple el linux, que es un sistema operatiu 
+            alternatiu i millor que el windows. En aquest cas root significa l'element significa el document arrel del html, aquest és el propi html.
+            Antigament es deia html "{propietat: valor}" , però es fa servir "root{--variable:valor}" perque té una prioritat més alta que html. 
+            Perque tot els estils que estiguin dintre de root afectaran a tota la pagina web html. Perque "--variable" és una variable CSS global,
+            que puc utilitzar vàries vegades. Aquestes variables s'anomenen variables CSS personalitzades, o custom propierties. 
+            Per exemple la variable primary és un color que surt diverses vegades, per exemple en botons d'aquest mateix color en el fons, en els titols, en àrees, com header
+            que es la capçelera principal. Això permet tenir el codi més organitzat, perquè el canvio una vegada en el root i es canvia en diferents 
+            llocs a la vegada. També permet codis més coherents visualment, ja que és el mateix color, i és més fàcil d'ampliar, com el mode fosc i clar,
+            El primary és el color principal de la web, en aquest cas só tons foscos per capçeleres i fons.
+            El secondary é sun color secundari i s'aplica en enllaços i coses que li vols donar importància.
             El accent dona encara més importància, per alertes o botons importants.
-            Light és un color clar
-            Light es un color clar que es faservir per el fons o textos suaus.
-            En aquest cas root significa l'elemnt significa el document arrel del html
-            Muted es un color apagat  per textos secundaris.
-            Succes es un color verd que indica exir o que s'a fet be
-            Card-bg es el fons d'una targeta o contenidor
-            Glass esun efecte de vidre translucid perque 0,6 es el canal alpha o transparencia que va despres de rgb,que signifca el color
-            Radius es el arrodniment de les cantonades lg=arodoniment grand(large) sm= arodoniment petit(small)
-            Shadow es una ombra suau per donar profunditata un black o contenedor */
+            Light és un color clar que és fa servir per fons o textos suaus, que no vulguis destacar o per marcar que és una cosa diferent.
+            Muted és un color apagat per textos secundaris.
+            Succes é sun color verd, que significa exit o que s'ha fet bé.
+            Card-bg és el fons d'una targeta o contenidor.
+            Glass és un efecte de vidre translucid, perque 0.6 és el canal alpha o transparència que va desprès de rgb, que significa el color.
+            Radius és el arrodoniment de les cantonades lg= arrodoniment gran (large) sm= arrodoniment petit (small).
+            Shadow és una ombra suau per donar profunditat a un block o contenedor. */
             --primary: #2c3e50;
             --secondary: #3498db;
             --accent: #e74c3c;
@@ -65,40 +63,40 @@
         }
 
         /* ===== BASIC LAYOUT ===== */
-        *{box-sizing:border-box}
-        /* L'asterisc és el seletor universal, per exemple si jo vull buscar un document i poso un asterisc al buscador, per exemple *-js- buscara
-        tots els documents que conntenen js(javascript), en aquest cas, posar un asterisc afecta a totes les etiquetes html.
-        La propietat box-sizing controla com es calcula l'amplada i l'alçada d'un element, concretament si el padin i el borden s'inclouen dins de les mides o no. Enn el cas
-        border-box que és el valor de la propietat box-sixing, l'amplada i l'alçada de tots els elements inclouen el border i el padding, en canvi en comptes de border-box poses
-        content-box l'amplada total seria més gran i hauries de sumar el padding i el border. És més fàcil per a un dissenyador fer border-box perquè té en compte totes les mides*/
+        *{box-sizing:border-box} 
+        /* L'asterisc * és un selector universal, per exemple si jo vull buscar un docuemnt i no m'en recordo del seu nom poso "*.docx" i apareixen tots els documents.
+        Si poso "*.js" buscara tots els documents que tenen js(javascript). Posar un asterisc afecta a totes les etiquetes html.
+        La propietat box-sizing cobtrola com es calcula l'amplada i l'alçada d'un element, concretament si el padding i el border s'inclouen dins 
+        de la mida o no. En el cas borderbox, que es el valor de la propietat box-sizing, l'amplada i l'alçada de tots els elements inclouen el border
+        i el padding, en canvi si en comptes de border-bix posés content-box ñ'amplada total seria és gran i hauries de sumar el padding i el bordr.
+        És més fàcil per un disenyador perque pot fer border-box perquè té en comte totes les mides, i apliques el box mode. */
         html,body{
             height:100%;
             margin:0;
             padding:0;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        /*És l'ordre de prioritzar cada tipus de lletra.*/
+            /*Els font-family és l'ordre en que busca les fonts de lletra, ja que si no troba la primera pasa a la segona i aixi fins al final, que si no troba 
+            posa sans-serif. Es a sir la prioritat del tipus de lletra*/
             background: linear-gradient(135deg,#f5f7fa 0%, #d8e1ef 100%);
-            /*Linear-gradient  fa una transició de color de fons(degradat suau perquè hi ha poca diferència entre les lletres al abecedari d-f).
+            /* linear-gradient fa una transició de color de fons, aquesta és un degradat suau ja que hi ha poca diferencia entre les lletres en l'abecedari.*/
             color:#222;
-            /*Color és el color del text*/
+            /* color és el color de text */
         }
 
         .app {
-            /* Quan hi ha un punt de app significa que és un identificador o ID. A la línia 305 hi ha un contenidor o divisor que tindrà una amplada
-            màxima i uns marges on estaràn els resultats*/
+        /* Quan hi ha un punt *abans de app significa que és un identificador o ID. A la linea 305 hi ha un contenidor o divisor que tindrà una amplada màxima i uns marges on estaràn 
+            els resultats.*/
             max-width: 1100px;
             margin: 28px auto;
             padding: 20px;
         }
 
-        header { 
-          /* Auna pàgina web pot haver una capçalera o header i la part inferior un peu de pàgina o footer.
-          Quan el gradient linieal és de grau 90, perquè posa 90deg vol dir 90 deegress vol dir que giro la pantalla 
-          90 graus vol dir que en quin sentit va el degradat de colors, en aquest cas gr a la dreta. Si és 180deg
-          significa que el degradat de colors cap amunt.
-          Linear gradient te traer*/
-           
-           
+        header {
+        /* A una pàgina web pot haver una capçalera o header i a la part inferior un peu de pàgina o footer.
+            Quan el gradient lineal és de 90 graus, perquè posa 90deg, que vol dir 90 dergrees vol dir que giro la pantalla 90 graus
+            que vol dir en quit sentit va el degradat de colors, en aquest cas gira capa a la dreta. Si és de 180deg va cap a baix,
+            i si és 270 deg cap a l'esquerra, si és de 0deg va cap a dalt. 
+            linear-gradient té tres arguments, que son el angle, el color inicial i el color final. */
             background: linear-gradient(90deg,var(--primary),#24414a);
             color: #fff;
             padding: 22px;
@@ -305,7 +303,7 @@
             .form-row { flex-direction: column; }
         }
     </style>
-   
+    
     <style>
   @keyframes swingArm1 {
     0%, 100% { transform: rotate(10deg); }
@@ -433,8 +431,8 @@
     </p>
 
     <p>
-      El <strong>jacobià</strong> és la matriu de <em>derivades parcials</em> que relaciona
-      les velocitats angulars de les articulacions $(\dot{q}_1, \dot{q}_2)$
+      El <strong>jacobià</strong> és la matriu de <em>derivades parcials</em> que relaciona 
+      les velocitats angulars de les articulacions $(\dot{q}_1, \dot{q}_2)$ 
       amb les velocitats lineals del punt final $(\dot{x}, \dot{y})$:
       <br /><br />
       $$
@@ -504,7 +502,7 @@
     </p>
 
     <p>
-      🔹 <strong>Jacobià invers</strong> ($J^{-1}$): permet calcular les variacions necessàries de les articulacions
+      🔹 <strong>Jacobià invers</strong> ($J^{-1}$): permet calcular les variacions necessàries de les articulacions 
       per aconseguir una determinada velocitat cartesiana.  
       S’utilitza en <em>cinemàtica inversa diferencial</em> i en el <em>control de trajectòries</em>.
     </p>
@@ -528,7 +526,7 @@
       En altres paraules, el jacobià transposat serveix per "traslladar" forces o esforços des de l’espai cartesià cap a l’espai articular.  
       És essencial en <em>control de forces</em>, on volem que el robot respongui amb un esforç adequat a una força externa.  
       <br /><br />
-      🔸 Exemple intuïtiu: si prems amb una força $F$ sobre el punt final, el jacobià transposat indica com es reparteix aquesta força
+      🔸 Exemple intuïtiu: si prems amb una força $F$ sobre el punt final, el jacobià transposat indica com es reparteix aquesta força 
       en torcs ($\tau_1, \tau_2$) a les articulacions.
     </p>
 
@@ -876,7 +874,7 @@
                             <p><strong>1.</strong> Jacobiana simbòlica:</p>
                             <div class="math-display">
                                 \\[
-                                J =
+                                J = 
                                 \\begin{bmatrix}
                                 -a_1 \\sin(q_1) - a_2 \\sin(q_1 + q_2) & -a_2 \\sin(q_1+q_2) \\\\
                                 a_1 \\cos(q_1) + a_2 \\cos(q_1 + q_2) & a_2 \\cos(q_1+q_2)
