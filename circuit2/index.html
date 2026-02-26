@@ -1,0 +1,66 @@
+
+
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" integrity="sha512-EBLzUL8XLl+va/zAsmXwS7Z2B1F9HUHkZwyS/VKwh3S7T/U0nF4BaU29EP/ZSf6zgiIxYAnKLu6bJ8dqpmX5uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/core.min.js" integrity="sha512-GuVoeU19Vs7el8GKo3lq2ogzwCIRBuQDnSL0rtHD4KVq3EymKgG4Uj/SEbbggJ+o+ocAcwdbn8hPSgdVPKdPlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/arduino.min.js" integrity="sha512-eh2wmSyRpwi1UaeOo63nlxYLgYkG2WAZ6grr5bXPHXwvyKe3oyY9gZBvoeJS20tNwqUIsrkWOca9ppRz2f50zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/languages/arduino.min.js" integrity="sha512-mE0sMLPrxRkL2hgpaCI99Gnh4nu758DLI/EcW+C4J7FkvFJpL0guBcSJjEYTaVa0yEQ2a0/l+ONtlDB0qnUh1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/arduino-light.min.css" integrity="sha512-M4nH9C7TRCVWLGruh9fHTfYxGWDiKpOGNjpfC9irhF06aLiYmJczZlW+/6IKOZ+75AGk4Wn4clgd6J13T0zzXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css" integrity="sha512-rO+olRTkcf304DQBxSWxln8JXCzTHlKnIdnMUwYvQa9/Jd4cQaNkItIUj6Z4nvW1dqK0SKXLbn9h4KwZTNtAyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>document.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightElement(block);
+  });
+});</script>
+    
+  </head>
+    
+       
+    <body> 
+      <h1>PWM: aconseguim una sortida analògica</h1>
+      <p>PWM significa Pulse Width Moduation, en català modulació de l'ampada del pols</p>
+      <p>A la següent imatge podem veure que si vull una sortida analògica en arduino per controlar un led
+      necessito donar polsos molt rapidament en milisegons de cinc volts. Aquest polsos són d'ona quadrada, és a dir, 
+      canvien de zero a cinc volts de forma immediata. Els canvis són tant ràpids que l'ull humà no els veu.
+      Si fos un motor servo de un braç robòtic la inèrcia del motor faria que no s'aturi.</p>
+      <p>Si dono 5 volts la meitat del temps pugant i aixant de 0-5 volts continuament en ona quadrada serà com si dones 2,5 volts
+      i el motor anirà a meitat de velocitat</p>
+      <p>En la següent imatge podem veure com funciona internament PWM.
+      </p>
+      <img src="PWM.gif"> 
+      <p>A la imatge de més amunt podem veure que amb 0 volts es mantindra constant el pols i a 5 volts es mantindra constant</p>
+      <p>Podem veure que el 50% de PWM vol dir que esta fent 0-1-0-1-0-1... de forma que la amplada del 0 volts és a dir, quan és 0
+      és igual a la amplada del 1 que es 5 volts. Això és un voltatge de 2,5V.</p>
+      
+      <p>Podem veure que el 25% de PWM vol dir que esta fent 0-0-0-1-0-0-0-1-0-0-0-1... de forma que la amplada del 0 volts és a dir, quan és 0
+      és igual a tres vegades a la amplada del 1 que es 5 volts. Això és un voltatge de 1,25V (5/4). </p>
+
+      <p>Podem veure que el 75% de PWM vol dir que esta fent 0-1-1-1-0-1-1-1-0-1-1-1... de forma que la amplada del 0 volts és a dir, quan és 0
+      és igual a la quarta part de la amplada del 1 que es 5 volts. Això es un voltatge de 3,75 (0,75*5) </p>
+      
+      <iframe width="725" height="453" src="https://www.tinkercad.com/embed/6IKniPvL2JS?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no">
+       <pre><code class="language-arduino">
+         
+// C++ code
+//Al principi sempre hi ha d'haver un comentari explicant que fa el codi següent.
+// El primer codi que s'ha d'executar, per asegurar que la placa es reconeguda i el port és reconegut
+//Aquest codi es blinking o parpelleig i encen o apaga el led
+
+void setup()
+{
+  pinMode(13, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(13, HIGH);
+  delay(1000); // Wait for 1000 millisecond(s)
+  digitalWrite(13, LOW);
+  delay(1000); // Wait for 1000 millisecond(s)
+}
+    
+      </pre></code>
+    </body>
+  
+</html>
