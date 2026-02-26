@@ -1,5 +1,3 @@
-
-
 <html>
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" integrity="sha512-EBLzUL8XLl+va/zAsmXwS7Z2B1F9HUHkZwyS/VKwh3S7T/U0nF4BaU29EP/ZSf6zgiIxYAnKLu6bJ8dqpmX5uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -14,9 +12,7 @@
   });
 });</script>
     
-  </head>
-    
-       
+  </head>    
     <body> 
       <h1>PWM: aconseguim una sortida analògica</h1>
       <p>PWM significa Pulse Width Moduation, en català modulació de l'ampada del pols</p>
@@ -31,13 +27,17 @@
       <img src="PWM.gif"> 
       <p>A la imatge de més amunt podem veure que amb 0 volts es mantindra constant el pols i a 5 volts es mantindra constant</p>
       <p>Podem veure que el 50% de PWM vol dir que esta fent 0-1-0-1-0-1... de forma que la amplada del 0 volts és a dir, quan és 0
-      és igual a la amplada del 1 que es 5 volts. Això és un voltatge de 2,5V.</p>
+      és igual a la amplada del 1 que es 5 volts. Això és un voltatge de 2,5V.
+      Com un arduino té PWM que funciona com una sortida analògicade 8 bits és a dir, 2<sup>8</sup> combinaciona, de 0-255, significa que un voltatge de 2,5 volts
+      donaria 127. La instrucio de arduino serà analogwrite</p>
       
       <p>Podem veure que el 25% de PWM vol dir que esta fent 0-0-0-1-0-0-0-1-0-0-0-1... de forma que la amplada del 0 volts és a dir, quan és 0
-      és igual a tres vegades a la amplada del 1 que es 5 volts. Això és un voltatge de 1,25V (5/4). </p>
+      és igual a tres vegades a la amplada del 1 que es 5 volts. Això és un voltatge de 1,25V (5/4).Com un arduino UNO té PWM que funciona com una sortida analògicade 8 bits és a dir, 2<sup>8</sup> combinaciona, de 0-255, significa que un voltatge de 2,5 volts
+      donaria 127. La instrucio de arduino serà analogwrite </p>
 
       <p>Podem veure que el 75% de PWM vol dir que esta fent 0-1-1-1-0-1-1-1-0-1-1-1... de forma que la amplada del 0 volts és a dir, quan és 0
-      és igual a la quarta part de la amplada del 1 que es 5 volts. Això es un voltatge de 3,75 (0,75*5) </p>
+      és igual a la quarta part de la amplada del 1 que es 5 volts. Això es un voltatge de 3,75 (0,75*5).Com un arduino té PWM que funciona com una sortida analògicade 8 bits és a dir, 2<sup>8</sup> combinaciona, de 0-255, significa que un voltatge de 2,5 volts
+      donaria 127. La instrucio de arduino serà analogwrite(191) </p>
       
       <iframe width="725" height="453" src="https://www.tinkercad.com/embed/6IKniPvL2JS?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no">
        <pre><code class="language-arduino">
