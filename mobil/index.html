@@ -1,11 +1,31 @@
 <html>
     <head>
     <title> DETECTOR MÒBIL </title>
+        <!-- MathJax per renderitzar fórmules LaTeX -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: { fontCache: 'global' },
+            startup: {
+                pageReady: function () {
+                    return MathJax.startup.defaultPageReady().then(function () {
+                        // Quan MathJax estigui llest, fem un primer càlcul
+                        // (es pot ometre aquí perquè hi ha un load event més endavant)
+                        // calculateAll();
+                    });
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   </head>
 <body>
   <h1>Elements electrònics per detectar un mòbil</h1>
   <ol>
-     <li></li>
     <li>MICROCONTROLADOR(CERVELL): Necessitem un compte que processi i decideix que fer: enecendre el LED,+
       mesurar la intensitat d'un LED proporcional a la distància del mòbil encès. També es pot fer un brunzidor,pantallas OLED o 
       pantalles LCD en una caixa impresa en 3D.
