@@ -7,296 +7,286 @@
 <head>
 <!--Head significa capçelera. Tots els codis de html tenen dos parts: head i body. En el head posem contingut que no veu l'usuari o es seundari per l'usuari-->
   <meta charset="UTF-8">
-<!--Tot html ha de dir quin conjunt de caràcters o lletres que utilitzem. Això es una metainformació i per això posa meta,
-  utf-8 és el conjunt de caràcters que utilitzem, unicode text forma de 8 bits. Utf-8 inclou ç, accents oberts i tancats,
-Charset vol dir character set, és el "set" que vol dir conjunt de "characters" o caràcters o lletres.-->
- 
+<!-- Tot HTML ha de dir quin conjunt de caràcters o lletres utilitzem. 
+Això és una metainformació i per això posa meta. 
+UTF-8 és el conjunt de caràcters que utilitzem: Unicode Text Format 8 bits. 
+Inclou ç, accents oberts i tancats... charset vol dir "caràcter set", 
+el conjunt (set) de caràcters (characters). -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--El viewport és una metainformació dde com veiem la pàgina web i la veiem amb lo que diu dins de content o contigut.
-  Width=device-width significa que la amplada del nostre contingut serà igual a la amplada del dispositiu (device), acepta totes:
-  rellotge, mòbil, tauleta, pc, televisió, pantalla de cinema...Initial-scale és la escala inicial és 1.0, si fos 2.0 sortiria el doble de gran
-  -->
-  <title>Càlcul de la posició d'un robot</title>
-<!--Title és el títol de la pestanya i no és el títol del document-->
-  <script type="text/javascript" async
-
+<!-- El viewport és una metainformació de com veiem la pàgina web. 
+width=device-width significa que l’amplada del contingut serà igual a la del dispositiu. 
+initial-scale=1.0 indica que l’escala inicial és normal (1.0). -->
+ <script type="text/javascript" async
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
-<!-- Script és una etiqueta molt importatnt perquè ens indica hi ha després és javascript. La línia anterior carrega matnjax que ens permet que
-  surtin formules matemàtique boniques-->
-    
+<!-- Script és una etiqueta molt importatnt perquè ens indica hi ha després és javascript. 
+  La línia anterior carrega matnjax que ens permet que surtin formules matemàtique boniques-->
+
   </script>
-
-  <style> /* Aquesta part del codi és CSS,que serveix per donar estil als elements html
-  El codi CSS sempre té la següent estructura. Comença amb una etiqueta html que volem modificar i donar estil,
-    a continuació es posa una clau "curly bracket" que engloba una o diverses línies amb la següent estructra:
-    propietat1:valor1; propietat2:valor2; etc. I s'acaba amb una clau tancada
-    Per exemple la línia 35 modificarà el body que es troba més a baix a la línia 77. Quines són les propietats?
-    font-family és la família del tipus de lletra o font. Hi ha tres famílies de lletres: sans-serif que significa sense 
-    serifa. Les serifes són adornaments o remats de les lletres. Les que tenen serifa s'anomenen serif. El tercer tipus és
-    monospace que significa que totes les lletres tenen el mateix ample i això és útil perquè el codi ho necessita.*/
-
-    body {
-
-      font-family: Arial, sans-serif;
-    /* La línia anterior*/
-      margin: 20px;
-    /* Margin és el marge exterior.*/
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" integrity="sha512-EBLzUL8XLl+va/zAsmXwS7Z2B1F9HUHkZwyS/VKwh3S7T/U0nF4BaU29EP/ZSf6zgiIxYAnKLu6bJ8dqpmX5uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/core.min.js" integrity="sha512-GuVoeU19Vs7el8GKo3lq2ogzwCIRBuQDnSL0rtHD4KVq3EymKgG4Uj/SEbbggJ+o+ocAcwdbn8hPSgdVPKdPlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/arduino.min.js" integrity="sha512-eh2wmSyRpwi1UaeOo63nlxYLgYkG2WAZ6grr5bXPHXwvyKe3oyY9gZBvoeJS20tNwqUIsrkWOca9ppRz2f50zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/languages/arduino.min.js" integrity="sha512-mE0sMLPrxRkL2hgpaCI99Gnh4nu758DLI/EcW+C4J7FkvFJpL0guBcSJjEYTaVa0yEQ2a0/l+ONtlDB0qnUh1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/arduino-light.min.css" integrity="sha512-M4nH9C7TRCVWLGruh9fHTfYxGWDiKpOGNjpfC9irhF06aLiYmJczZlW+/6IKOZ+75AGk4Wn4clgd6J13T0zzXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css" integrity="sha512-rO+olRTkcf304DQBxSWxln8JXCzTHlKnIdnMUwYvQa9/Jd4cQaNkItIUj6Z4nvW1dqK0SKXLbn9h4KwZTNtAyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>document.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightElement(block);
+  });
+});</script>
+   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web de Sara </title>
+  <!--Link és un codi html que permet unir i linkar arxius CSS. Els arxius CSS són conjunt de codis
+  que ens permeten donar estil a la pàgina. CSS (cascade style sheet) significa full d'estil en cascada i permet donar 
+  marges de text, triar el tipus de lletra, triar el color de la lletra, el tamany de la lletra, el interlineat. En cascada vol dir
+  que afecta a diverses pàgines, un darrere de l'altre. Les dues linies seguents són CDN: Content Delivery Network,
+  es a dir una adreça d'internet on està una biblioteca amb moltes instruccions que ens ajuden a fer estils desplegables
+  amb estil (la linea dels 2). La segona linea inclou la biblioteca d'estils font-awesome, perque inclou font o tipus de lletra
+  amb simbols i dibuixos amb icones. Si no poso o m'oblido les dues linies seguents no funcionarà algunes linies que estàn
+  més endavant. Per exemple linea 26 i 27 funcionarà perquè dropdown-item pertany a bootstrap. Font awesome, si no afegim font-awesome
+  la linea 93,95,96 no dibuixarien icones el el menú exemple: fa-solid fa-code-->
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+  <style>
+/* 1. Submenús en mode fosc */
+    body[data-bs-theme="dark"] .dropdown-menu {
+      background-color: #2c2c2c !important;
+      border-color: #444;
     }
-    .equation { 
-      /* El punt que hi ha davant de equation significa que són de la mateixa classe "class=equation", s'utilitza a la línia 139 i fa que les equacions tinguin
-      20px més que el body només a dalt i a baix.*/
-      
-      margin: 20px 0;
+    body[data-bs-theme="dark"] .dropdown-item {
+      color: #f8f9fa !important;
     }
-    .results {
-      /* És una classe que no s'utilita de moment, sortiria la lletra en negreta*/
-
-      font-weight: bold;
-    }
-
-    /* Oculta els elements de sortida per defecte */
-
-    #output, #robotCanvas {
-
-      display: none;
-/* Output i robotCanvas tenen un hastag davant */
-    }
-
-
-    canvas {
-
-      border: 1px solid black;
-
+    body[data-bs-theme="dark"] .dropdown-item:hover,
+    body[data-bs-theme="dark"] .dropdown-item:focus {
+      background-color: #3c3c3c !important;
+      color: #ffffff !important;
     }
 
-  </style>
+    /* 2. Botó mode fosc/clar només icona */
+    #themeToggle {
+      border: none;
+      background: transparent;
+      font-size: 1.3rem;
+      color: inherit;
+    }
+
+    /* 3. Hamburguesa blanca en mode fosc */
+    .navbar-toggler {
+      border: none;
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    body[data-bs-theme="dark"] .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.9%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* 4. Logo circular i adaptatiu */
+    .logo {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+    }
+    @media (max-width: 576px) {
+      .logo {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    @media (min-width: 992px) {
+      .logo {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+<!-- Contingut -->
+  <main class="container py-5">
+       <h1 class="display-5 fw-bold mb-4">Calcul de la posició d'un robot amb dos braços</h1>
+
+ <title>Calcul de la posició d'un robot</title>
+<!-- Title és el títol de la pestanya i no del document -->
+ 
+<style>  
+/* Aquesta part del codi és CSS, que serveix per donar estil als elements HTML. */
+
+body {
+  font-family: Arial, sans-serif; 
+  /* Arial per tot el text del body, i si no la troba, una lletra sans-serif. */
+  margin: 20px; 
+  /* Afegeix un marge exterior de 20 píxels a tot el cos de la pàgina. */
+}
+
+.equation {
+  /* .equation és una classe que s’utilitza per a les fórmules, 
+     i dona un marge vertical de 20 píxels. */
+  margin: 20px 0;
+}
+
+.results {
+  /* Classe que serviria per mostrar el text en negreta */
+  font-weight: bold;
+}
+
+/* Oculta els elements de sortida per defecte */
+#output, #robotCanvas {
+  display: none;
+}
+ 
+canvas {
+  border: 1px solid black;
+}
+</style>
 
 </head>
 
-<body>
+<body> 
 
-  <h1>Càlcul de la posició d'un robot amb dos braços</h1>
+<div>
 
-  <div>
+<label for="a1">Longitud del primer braç (a₁):</label>
+<!-- label és una etiqueta per indicar què s'ha de posar a l'input -->
+<input type="number" id="a1" value="2" step="0.1"><br><br>
 
-    <label for="a1">Longitud del primer braç (a₁):</label>
-    /* label es tradueix co "etiqueta". És un espai que serveix com a indicador del que s'ha de posar a l'input.+/ 
-   
-    <input type="number" id="a1" value="1" step="0.1"><br><br>
-    /* Input significa una entrada de informació per part de l'usuari.
-    Apareix una caixa de text per escriure que nómes accepta números, perquè type="number".
-    id significa identificador únic, és como un DNI.
-    value és el valor per defecte. Si no hi ha cap valor per defecte especificat, surt aquest a la caixa de text.
-    step significa la variació que es pot produir.
-    br és una línia en blanc, un espai. */
+<label for="a2">Longitud del segon braç (a₂):</label>
+<input type="number" id="a2" value="0.5" step="0.1"><br><br>
 
+<label for="q1">Angle del primer braç (q₁, en graus):</label>
+<input type="number" id="q1" value="45" step="0.1"><br><br>
 
-    <label for="a2">Longitud del segon braç (a₂):</label>
+<label for="q2">Angle del segon braç (q₂, en graus):</label>
+<input type="number" id="q2" value="30" step="0.1"><br><br>
 
-    <input type="number" id="a2" value="0.5" step="0.1"><br><br>
+<button onclick="calculatePosition()">Calcula la posició</button>
+<!-- Aquesta línia relaciona el codi HTML amb el JavaScript perquè la propietat onclick 
+executa la funció calculatePosition(), definida més avall. -->
+</div>
 
-    <label for="q1">Angle del primer braç (q₁, en graus):</label>
+<div id="output"></div>
 
-    <input type="number" id="q1" value="45" step="0.1"><br><br>
-
-    <label for="q2">Angle del segon braç (q₂, en graus):</label>
-
-    <input type="number" id="q2" value="30" step="0.1"><br><br>
-
-
-    <button onclick="calculatePosition()">Calcula la posició</button>
-    /* la línia 99 relaciona el codi html amb el codi javascript perquè la
-    etiqueta "buton" de html té una propietat anomenada "onclick" que executa una funció javascript anomenada "calculatePosition()",
-    trobada a la líniea 122 que farà els càlculs matemàtics.*/
-
-  </div>
-
-  <div id="output"></div>
-
-  <canvas id="robotCanvas" width="400" height="400"></canvas>
-/* la líniea 115 i 117 són espais buits, fets per divisors (trossos de codi).
-  a la 115 li hem dit "output", que són les fórmules que apareixeran. 
-"robotCanvas" és un altre divisor on apareixeran els dibuixos dels vectors.*/
-
+<canvas id="robotCanvas" width="400" height="400"></canvas>
+<!-- robotCanvas és un espai per dibuixar (canvas) on apareixeran els vectors dels braços. -->
+ 
 <script>
-
 function calculatePosition() {
 
   // Agafar les dades introduïdes per l'usuari
-
   let a1 = parseFloat(document.getElementById('a1').value);
-  // let a1 crea un espai a l memòria per emmagatzemar el valor introduit per l'usuari (getElementById('a1')  agafa el valor de a1.
-  // parseFloat converteix el número en un floating point number (número decimal). Queda emmagatzemat el que introdueix l'usuari  a a1.*/
+  // parseFloat converteix el número en decimal (float)
+
   let a2 = parseFloat(document.getElementById('a2').value);
+  let q1_deg = parseFloat(document.getElementById('q1').value); // Graus
+  let q2_deg = parseFloat(document.getElementById('q2').value); // Graus
 
-  let q1_deg = parseFloat(document.getElementById('q1').value); // Grados
+  let q1 = q1_deg * Math.PI / 180; // Converteix graus a radians
+  let q2 = q2_deg * Math.PI / 180; // Converteix graus a radians
 
-  let q2_deg = parseFloat(document.getElementById('q2').value); // Grados
-
-  let q1 = q1_deg * Math.PI / 180; // Convertir graus a radians
-
-  let q2 = q2_deg * Math.PI / 180; // Convertir graus a radians
-
-  // **Mostrar els contenidors de sortida**
-
+  // Mostrar els contenidors de sortida
   document.getElementById('output').style.display = 'block';
-
-  document.getElementById('robotCanvas').style.display = 'block';
+  document.getElementById('robotCanvas').style.display = 'block'; 
 
   // Fase 1: Fórmules
-
   let output = "<div class='equation'>Les equacions per calcular la posició final del robot són:</div>";
-
-  output += "<div class='equation'>\\[ x = a_1 \\cos(q_1) + a_2 \\cos(q_1 + q_2) \\]</div>";
-
+  output += "<div class='equation'>\\[ x = a_1 \\cos(q_1) + a_2 \\cos(q_1 + q_2) \\]</div>"; 
   output += "<div class='equation'>\\[ y = a_1 \\sin(q_1) + a_2 \\sin(q_1 + q_2) \\]</div>";
 
-
   // Fase 2: Substituir les variables
-
-  output += "<div class='equation'>Substituïm els valors:</div>";
-
-  output += `<div class='equation'>\\[ x = ${a1} \\cos(${q1_deg}°) + ${a2} \\cos(${q1_deg}° + ${q2_deg}°) \\]</div>`;
-
-  output += `<div class='equation'>\\[ y = ${a1} \\sin(${q1_deg}°) + ${a2} \\sin(${q1_deg}° + ${q2_deg}°) \\]</div>`;
-
+  output += "<div class='equation'>Substituint els valors:</div>";
+  output += `<div class='equation'>\\[ x = ${a1} \\cos(${q1_deg}º) + ${a2} \\cos(${q1_deg}º + ${q2_deg}º) \\]</div>`;
+  output += `<div class='equation'>\\[ y = ${a1} \\sin(${q1_deg}º) + ${a2} \\sin(${q1_deg}º + ${q2_deg}º) \\]</div>`;
 
   // Fase 3: Càlcul numèric detallat
-
   let x1 = a1 * Math.cos(q1);
-
   let x2 = a2 * Math.cos(q1 + q2);
-
   let y1 = a1 * Math.sin(q1);
-
   let y2 = a2 * Math.sin(q1 + q2);
 
-
   output += "<div class='equation'>Desglossant els càlculs:</div>";
-
-  output += `<div class='equation'>\\[ x_1 = a_1 \\cos(q_1) = ${a1} \\times \\cos(${q1_deg}°) = ${x1.toFixed(2)} \\]</div>`;
-
-  output += `<div class='equation'>\\[ x_2 = a_2 \\cos(q_1 + q_2) = ${a2} \\times \\cos(${q1_deg}° + ${q2_deg}°) = ${x2.toFixed(2)} \\]</div>`;
-
-  output += `<div class='equation'>\\[ y_1 = a_1 \\sin(q_1) = ${a1} \\times \\sin(${q1_deg}°) = ${y1.toFixed(2)} \\]</div>`;
-
-  output += `<div class='equation'>\\[ y_2 = a_2 \\sin(q_1 + q_2) = ${a2} \\times \\sin(${q1_deg}° + ${q2_deg}°) = ${y2.toFixed(2)} \\]</div>`;
-
+  output += `<div class='equation'>\\[ x_1 = a_1 \\cos(q_1) = ${a1} \\times \\cos(${q1_deg}º) = ${x1.toFixed(2)} \\]</div>`;
+  output += `<div class='equation'>\\[ x_2 = a_2 \\cos(q_1 + q_2) = ${a2} \\times \\cos(${q1_deg}º + ${q2_deg}º) = ${x2.toFixed(2)} \\]</div>`;
+  output += `<div class='equation'>\\[ y_1 = a_1 \\sin(q_1) = ${a1} \\times \\sin(${q1_deg}º) = ${y1.toFixed(2)} \\]</div>`;
+  output += `<div class='equation'>\\[ y_2 = a_2 \\sin(q_1 + q_2) = ${a2} \\times \\sin(${q1_deg}º + ${q2_deg}º) = ${y2.toFixed(2)} \\]</div>`;
 
   // Resultat final
-
   let x = x1 + x2;
-
   let y = y1 + y2;
 
-
   output += "<div class='equation'>Calculant els resultats numèrics totals:</div>";
-
   output += `<div class='equation'>\\[ x = ${x.toFixed(2)} \\]</div>`;
-
   output += `<div class='equation'>\\[ y = ${y.toFixed(2)} \\]</div>`;
 
-
   // Mostrar el resultat
-
   document.getElementById('output').innerHTML = output;
-
   MathJax.typeset(); // Renderitzar MathJax per mostrar les fórmules correctament
 
-
   // Fase 4: Part gràfica
-
-  let canvas = document.getElementById('robotCanvas');
-
-  let ctx = canvas.getContext('2d');
-
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // Netejar canvas
-
+  let canvas = document.getElementById('robotCanvas'); // Canvas = paper on dibuixar
+  let ctx = canvas.getContext('2d'); // ctx és el "pincell"
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // Neteja el canvas
 
   // Centre i escales
-
-  let centerX = canvas.width / 2;
-
+  let centerX = canvas.width / 2; 
   let centerY = canvas.height / 2;
-
   let scale = 80;
 
-
-  // Coordenades
-
-  let x1_screen = centerX + x1 * scale;
-
-  let y1_screen = centerY - y1 * scale;
-
-  let x2_screen = centerX + x * scale;
-
+  // Coordenades en pantalla
+  let x1_screen = centerX + x1 * scale; 
+  let y1_screen = centerY - y1 * scale; 
+  let x2_screen = centerX + x * scale; 
   let y2_screen = centerY - y * scale;
 
-
-  // Dibuxar braç 1
-
+  // Dibuixar braç 1 (de la base al punt x1, y1)
   ctx.beginPath();
-
   ctx.moveTo(centerX, centerY);
-
-  ctx.lineTo(x1_screen, y1_screen);
-
+  ctx.lineTo(x1_screen, y1_screen); 
   ctx.strokeStyle = 'blue';
-
   ctx.lineWidth = 5;
-
   ctx.stroke();
 
-
-  // Dibuxar braç 2
-
-  ctx.beginPath();
-
+  // Dibuixar braç 2 (del punt x1, y1 al punt final x2, y2)
+  ctx.beginPath(); 
   ctx.moveTo(x1_screen, y1_screen);
-
-  ctx.lineTo(x2_screen, y2_screen);
-
-  ctx.strokeStyle = 'green';
-
+  ctx.lineTo(x2_screen, y2_screen); 
+  ctx.strokeStyle = 'green'; 
   ctx.lineWidth = 5;
-
   ctx.stroke();
 
-
-  // Dibuxar els cercles als extrems
-
-  ctx.beginPath();
-
-  ctx.arc(centerX, centerY, 5, 0, 2 * Math.PI); // Base del braç
-
+  // Dibuixar els cercles als extrems 
+  ctx.beginPath(); 
+  ctx.arc(centerX, centerY, 5, 0, 2 * Math.PI); // Base del braç 
   ctx.fillStyle = 'red';
-
+  ctx.fill();
+ 
+  ctx.beginPath(); 
+  ctx.arc(x1_screen, y1_screen, 5, 0, 2 * Math.PI); // Final del primer braç 
+  ctx.fillStyle = 'red';
   ctx.fill();
 
-
-  ctx.beginPath();
-
-  ctx.arc(x1_screen, y1_screen, 5, 0, 2 * Math.PI); // Final del primer braç
-
+  ctx.beginPath(); 
+  ctx.arc(x2_screen, y2_screen, 5, 0, 2 * Math.PI); // Final del segon braç 
   ctx.fillStyle = 'red';
-
   ctx.fill();
-
-
-  ctx.beginPath();
-
-  ctx.arc(x2_screen, y2_screen, 5, 0, 2 * Math.PI); // Final del segon braç
-
-  ctx.fillStyle = 'red';
-
-  ctx.fill();
-
 }
-
 </script>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+  
