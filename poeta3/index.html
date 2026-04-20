@@ -1,0 +1,89 @@
+
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Poeta Sentiment - Correcció</title>
+  <script src="https://bundle.run/sentiment@5.0.2"></script>
+  
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 50px; background: #f0f2f5; }
+    .caixa { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: inline-block; }
+    input { padding: 10px; width: 250px; }
+    button { padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; }
+    
+    #resposta { margin-top: 20px; font-size: 1.2rem; color: #333; font-style: italic; }
+    
+    /* Estil per al div d'errors */
+    #error-div { 
+      margin-top: 15px; 
+      padding: 10px; 
+      background: #ffe3e3; 
+      color: #b00000; 
+      border: 1px solid #ffbaba; 
+      border-radius: 5px; 
+      display: none; /* Amagat per defecte */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="caixa">
+    <h1>Com et sents?</h1>
+    <input type="text" id="text" placeholder="Escriu en anglès (ex: I am happy)">
+    <button onclick="analitza()">Inspirar-me</button>
+
+    <div id="resposta"></div>
+    <div id="error-div"></div>
+  </div>
+
+  <script>
+    function analitza() {
+      const resp = document.getElementById("resposta");
+      const errDiv = document.getElementById("error-div");
+      const text = document.getElementById("text").value;
+
+      // Netejem missatges anteriors
+      resp.innerText = "";
+      errDiv.style.display = "none";
+
+      try {
+        // En la versió de navegador de 'bundle.run', s'accedeix així:
+        const Sentiment = window.sentiment; 
+        const s = new Sentiment();
+        
+        if (!text.trim()) {
+            throw new Error("Si us plau, escriu alguna frase.");
+        }
+
+        const result = s.analyze(text);
+        
+        const frases = {
+          positiu: "La llum dins teu floreix com un matí infinit.",
+          negatiu: "La tristesa és una ombra que també sap abraçar.",
+          neutre: "Ets un instant suspès entre somni i realitat."
+        };
+
+        let tipus = "neutre";
+        if (result.score > 0) tipus = "positiu";
+        if (result.score < 0) tipus = "negatiu";
+
+        resp.innerText = frases[tipus];
+
+      } catch (error) {
+        // Fem visible el div d'errors i hi posem el missatge
+        errDiv.innerText = "⚠️ Error: " + error.message;
+        errDiv.style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
