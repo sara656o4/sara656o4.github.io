@@ -1,0 +1,443 @@
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reconeixement de Veu amb Respostes Inteligents</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f7ff;
+            color: #333;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        #btnParla {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        #btnParla:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        #btnEscolta {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        #btnEscolta:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        #btnPara {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        #btnPara:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .escoltant {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 5px solid #ffc107;
+        }
+        
+        .detectat {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #dc3545;
+        }
+        
+        .esperant {
+            background-color: #e2e3e5;
+            color: #383d41;
+            border-left: 5px solid #6c757d;
+        }
+        
+        .result-box {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background-color: #f8f9fa;
+            min-height: 80px;
+        }
+        
+        .sentiment-box {
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .positiu {
+            background-color: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        
+        .negatiu {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+        
+        .neutral {
+            background-color: #e2e3e5;
+            color: #383d41;
+            border: 2px solid #d6d8db;
+        }
+        
+        .resposta-box {
+            background-color: #e8f4fc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+            border-left: 5px solid #3498db;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .resposta-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .puntuacio {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .icon {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🎤 Reconeixement de Veu amb Respostes Inteligents</h2>
+        
+        <div class="controls">
+            <button id="btnParla" onclick="start()">
+                <span class="icon">🎙️</span> Parla ara
+            </button>
+            <button id="btnEscolta" onclick="reprodueixResposta()">
+                <span class="icon">🔊</span> Escolta resposta
+            </button>
+            <button id="btnPara" onclick="paraVeu()">
+                <span class="icon">⏹️</span> Para veu
+            </button>
+        </div>
+        
+        <div class="status esperant" id="estat">
+            Estat: Esperant que parlis...
+        </div>
+        
+        <p><strong>Text que has dit:</strong></p>
+        <div class="result-box">
+            <div id="resultat">El text reconegut apareixerà aquí...</div>
+        </div>
+        
+        <p><strong>Anàlisi de sentiments:</strong></p>
+        <div class="sentiment-box neutral" id="sentiment">
+            ⏳ Analitzant...
+        </div>
+        
+        <div class="puntuacio" id="puntuacio"></div>
+        
+        <p><strong>Resposta del sistema:</strong></p>
+        <div class="resposta-box">
+            <div class="resposta-header">
+                <span class="icon">🤖</span>
+                <strong>Assistent:</strong>
+            </div>
+            <div id="resposta">Diré una resposta personalitzada segons el teu estat d'ànim...</div>
+        </div>
+    </div>
+
+    <script>
+        // Diccionari simplificat de sentiments (10 paraules)
+        const diccionariSentiments = {
+            // Paraules positives
+            "bo": 2, "bé": 2, "content": 2, "feliç": 3, "fantàstic": 3,
+            // Paraules negatives
+            "dolent": -2, "malament": -2, "trist": -2, "horrible": -3, "problema": -1
+        };
+
+        // Variables globals
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = "ca-ES";
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        
+        let sintesisVeu = null;
+        let respostaActual = "";
+        let puntuacioActual = 0;
+
+        // Funcions de text-to-speech
+        function parla(text) {
+            if (sintesisVeu) {
+                sintesisVeu.cancel();
+            }
+            
+            sintesisVeu = new SpeechSynthesisUtterance(text);
+            sintesisVeu.lang = "ca-ES";
+            sintesisVeu.rate = 1.0;
+            sintesisVeu.pitch = 1.0;
+            sintesisVeu.volume = 1.0;
+            
+            sintesisVeu.onstart = function() {
+                document.getElementById("estat").innerText = "🔊 Reproduint resposta...";
+                document.getElementById("estat").className = "status escoltant";
+            };
+            
+            sintesisVeu.onend = function() {
+                document.getElementById("estat").innerText = "✅ Resposta completada";
+                document.getElementById("estat").className = "status detectat";
+            };
+            
+            window.speechSynthesis.speak(sintesisVeu);
+        }
+        
+        function reprodueixResposta() {
+            if (respostaActual) {
+                parla(respostaActual);
+            } else {
+                parla("Encara no he detectat cap text per respondre. Parla primer.");
+            }
+        }
+        
+        function paraVeu() {
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                document.getElementById("estat").innerText = "⏹️ Reproducció aturada";
+                document.getElementById("estat").className = "status esperant";
+            }
+        }
+
+        // Anàlisi de sentiments i generació de resposta
+        function analitzarSentiment(text) {
+            const paraules = text.toLowerCase().split(/[\s,.!?]+/);
+            let puntuacio = 0;
+            let paraulesTrobades = [];
+            
+            for (const paraula of paraules) {
+                if (diccionariSentiments.hasOwnProperty(paraula)) {
+                    puntuacio += diccionariSentiments[paraula];
+                    paraulesTrobades.push({
+                        paraula: paraula,
+                        valor: diccionariSentiments[paraula]
+                    });
+                }
+            }
+            
+            return {
+                puntuacio: puntuacio,
+                paraulesTrobades: paraulesTrobades
+            };
+        }
+        
+        function generarResposta(text, puntuacio, paraulesTrobades) {
+            let resposta = "";
+            
+            if (puntuacio >= 4) {
+                resposta = "Fantàstic! Em fa molt feliç sentir que estàs tan content! 😊 Segueix així, ets increïble!";
+            } else if (puntuacio >= 2) {
+                resposta = "Molt bé! Sembla que avui estàs d'un bon humor. Espero que continuïs així tot el dia! 😄";
+            } else if (puntuacio >= 1) {
+                resposta = "Em sembla que estàs bastant bé avui. Espero que tinguis un bon dia! 🙂";
+            } else if (puntuacio === 0 && paraulesTrobades.length === 0) {
+                resposta = "Gràcies per parlar amb mi. No he detectat sentiments específics en el que has dit, però estaré aquí per escoltar-te quan vulguis.";
+            } else if (puntuacio === 0) {
+                resposta = "Entesos. Gràcies per compartir això amb mi. Estic aquí per escoltar-te sempre que vulguis.";
+            } else if (puntuacio >= -1) {
+                resposta = "Sembla que avui no estàs del tot bé. Espero que tot millori aviat. 😊";
+            } else if (puntuacio >= -3) {
+                resposta = "Ho sento molt que no estiguis bé. Recorda que els moments difícils sempre passen. T'estic escoltant. 🤗";
+            } else {
+                resposta = "Sembla que estàs passant per un moment difícil. T'agraeixo que ho compartis amb mi. Estic aquí per ajudar-te en el que pugui. 💙";
+            }
+            
+            return resposta;
+        }
+        
+        function actualitzarInterficie(text, resultatAnalisi) {
+            const elementSentiment = document.getElementById("sentiment");
+            const elementResposta = document.getElementById("resposta");
+            const elementPuntuacio = document.getElementById("puntuacio");
+            
+            // Determinar sentiment
+            let sentiment = "neutral";
+            let missatgeSentiment = "";
+            let icona = "";
+            
+            if (resultatAnalisi.puntuacio > 3) {
+                sentiment = "positiu";
+                missatgeSentiment = "😊 SENTIMENT MOLT POSITIU";
+                icona = "😊";
+            } else if (resultatAnalisi.puntuacio > 0) {
+                sentiment = "positiu";
+                missatgeSentiment = "🙂 SENTIMENT POSITIU";
+                icona = "🙂";
+            } else if (resultatAnalisi.puntuacio < -3) {
+                sentiment = "negatiu";
+                missatgeSentiment = "😢 SENTIMENT MOLT NEGATIU";
+                icona = "😢";
+            } else if (resultatAnalisi.puntuacio < 0) {
+                sentiment = "negatiu";
+                missatgeSentiment = "😐 SENTIMENT NEGATIU";
+                icona = "😐";
+            } else {
+                sentiment = "neutral";
+                missatgeSentiment = "😐 SENTIMENT NEUTRAL";
+                icona = "😐";
+            }
+            
+            // Actualitzar caixa de sentiment
+            elementSentiment.innerHTML = `${icona} ${missatgeSentiment}`;
+            elementSentiment.className = `sentiment-box ${sentiment}`;
+            
+            // Generar i mostrar resposta
+            respostaActual = generarResposta(text, resultatAnalisi.puntuacio, resultatAnalisi.paraulesTrobades);
+            elementResposta.innerHTML = respostaActual;
+            
+            // Mostrar puntuació i paraules detectades
+            let textPuntuacio = `Puntuació: ${resultatAnalisi.puntuacio}`;
+            if (resultatAnalisi.paraulesTrobades.length > 0) {
+                textPuntuacio += ` | Paraules detectades: `;
+                resultatAnalisi.paraulesTrobades.forEach((p, index) => {
+                    const signe = p.valor > 0 ? "+" : "";
+                    textPuntuacio += `${p.paraula}(${signe}${p.valor})`;
+                    if (index < resultatAnalisi.paraulesTrobades.length - 1) {
+                        textPuntuacio += ", ";
+                    }
+                });
+            }
+            elementPuntuacio.innerText = textPuntuacio;
+            
+            // Reproduir resposta automàticament
+            setTimeout(() => {
+                parla(respostaActual);
+            }, 800);
+        }
+
+        // Funcions de reconeixement de veu
+        function start() {
+            document.getElementById("estat").innerText = "🎧 Escoltant... Parla ara";
+            document.getElementById("estat").className = "status escoltant";
+            document.getElementById("resultat").innerText = "Escoltant...";
+            
+            recognition.start();
+        }
+        
+        recognition.onresult = function(e) {
+            const textReconegut = e.results[0][0].transcript;
+            
+            document.getElementById("estat").innerText = "✅ Veu detectada i processant...";
+            document.getElementById("estat").className = "status detectat";
+            document.getElementById("resultat").innerText = textReconegut;
+            
+            // Analitzar sentiment
+            const resultatAnalisi = analitzarSentiment(textReconegut);
+            
+            // Actualitzar interficie amb la resposta
+            actualitzarInterficie(textReconegut, resultatAnalisi);
+        };
+        
+        recognition.onerror = function(e) {
+            document.getElementById("estat").innerText = "❌ Error: " + e.error;
+            document.getElementById("estat").className = "status error";
+            document.getElementById("resultat").innerText = "Error en el reconeixement";
+        };
+        
+        recognition.onend = function() {
+            // No fem res aquí perquè ja ho gestionem en onresult
+        };
+
+        // Inicialització
+        window.onload = function() {
+            // Comprovar suport del navegador
+            if (!SpeechRecognition) {
+                alert("El teu navegador no suporta l'API de reconeixement de veu. Prova amb Chrome o Edge.");
+            }
+            
+            if (!window.speechSynthesis) {
+                alert("El teu navegador no suporta l'API de síntesi de veu.");
+            }
+            
+            // Detectar si el navegador suporta català
+            const veus = window.speechSynthesis.getVoices();
+            const teCatala = veus.some(veu => veu.lang.startsWith('ca'));
+            
+            if (!teCatala) {
+                console.log("No s'ha trobat veu en català. S'usarà la veu per defecte.");
+            }
+        };
+    </script>
+</body>
+</html>
