@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robot Poeta Sentimental</title>
+<style>
+body {
+    font-family: 'Georgia', serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f0e6;
+    color: #333;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4c4a8' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+h1 {
+    text-align: center;
+    color: #5d4037;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #795548;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.robot-icon {
+    text-align: center;
+    font-size: 3em;
+    margin: 20px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.robot-icon.talking {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+button {
+    background-color: #8d6e63;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    font-family: 'Georgia', serif;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #6d4c41;
+}
+
+#estat {
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+    font-style: italic;
+    background-color: #fff3e0;
+    transition: background-color 0.8s, color 0.8s;
+}
+
+.box {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 5px solid #8d6e63;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.sentiment-box {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    transition: background-color 0.8s, color 0.8s, border-color 0.8s;
+}
+
+.positiu { background-color: #e8f5e9; color: #2e7d32; border: 2px solid #81c784; }
+.negatiu { background-color: #ffebee; color: #c62828; border: 2px solid #ef9a9a; }
+.neutral { background-color: #f3e5f5; color: #7b1fa2; border: 2px solid #ce93d8; }
+
+.poema {
+    font-style: italic;
+    line-height: 1.8;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    border: 2px dashed #8d6e63;
+    margin: 20px 0;
+}
+
+.poema .vers {
+    margin: 10px 0;
+    padding: 8px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+}
+
+.poema .signatura {
+    text-align: right;
+    font-style: normal;
+    font-weight: bold;
+    color: #5d4037;
+    margin-top: 20px;
+}
+
+.controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.controls button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 20px;
+}
+
+#estilPoema {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+</style>
+</head>
+<body>
+
+<div class="robot-icon">🤖✍️</div>
+<h1>Robot Poeta Sentimental</h1>
+<div class="subtitle">Transformo les teves paraules en versos que senten</div>
+
+<div class="controls">
+    <button onclick="start()">🎤 Parla amb mi</button>
+    <button onclick="reprodueixPoema()">🔊 Escolta el poema</button>
+    <br>
+    <label for="estilPoema">Estil de poema:</label>
+    <select id="estilPoema">
+        <option value="clàssic">Clàssic</option>
+        <option value="modern">Modern</option>
+        <option value="minimalista">Minimalista</option>
+    </select>
+</div>
+
+<div class="box">
+    <p><strong>Estat:</strong></p>
+    <div id="estat">🌬️ Esperant les teves paraules al vent...</div>
+</div>
+
+<div class="box">
+    <p><strong>Les teves paraules:</strong></p>
+    <div id="resultat">Aquí apareixerà el que diguis...</div>
+</div>
+
+<div class="box">
+    <p><strong>Anàlisi de sentiments:</strong></p>
+    <div class="sentiment-box neutral" id="sentiment">
+        Esperant les teves paraules...
+    </div>
+</div>
+
+<div class="box">
+    <p><strong>Poema generat:</strong></p>
+    <div class="poema" id="poema">
+        <div class="vers">El poeta robòtic espera</div>
+        <div class="vers">les teves paraules al vent</div>
+        <div class="vers">per transformar sentiments</div>
+        <div class="vers">en versos d'argent.</div>
+        <div class="signatura">— Robot Poeta</div>
+    </div>
+</div>
+
+<script>
+// Diccionari sentiments simplificat
+const diccionariSentiments = {
+    "bo":2,"bé":2,"content":2,"feliç":3,"fantàstic":3,
+    "dolent":-2,"malament":-2,"trist":-2,"horrible":-3,"problema":-1
+};
+
+let poemaActual = "";
+let sintesisVeu = null;
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+recognition.lang = "ca-ES";
+recognition.continuous = false;
+recognition.interimResults = false;
+
+// Funció TTS amb animació robot
+function parla(text) {
+    if (sintesisVeu) window.speechSynthesis.cancel();
+    sintesisVeu = new SpeechSynthesisUtterance(text);
+    sintesisVeu.lang = "ca-ES"; sintesisVeu.rate = 0.9; sintesisVeu.pitch = 1.0; sintesisVeu.volume = 1.0;
+
+    sintesisVeu.onstart = () => {
+        document.getElementById("estat").innerText = "🔊 El poema flueix com riu de llum...";
+        document.querySelector('.robot-icon').classList.add('talking');
+    };
+    sintesisVeu.onend = () => {
+        document.getElementById("estat").innerText = "✅ Poema recitat amb l'ànima";
+        document.querySelector('.robot-icon').classList.remove('talking');
+    };
+    window.speechSynthesis.speak(sintesisVeu);
+}
+
+function reprodueixPoema() {
+    if (poemaActual) parla(poemaActual);
+    else parla("Encara no he sentit les teves paraules per crear un poema. Parla amb mi!");
+}
+
+// Anàlisi sentiment
+function analitzarSentiment(text) {
+    const paraules = text.toLowerCase().split(/\s+/);
+    let puntuacio = 0;
+    for (const paraula of paraules) if(diccionariSentiments[paraula]) puntuacio+=diccionariSentiments[paraula];
+    return puntuacio;
+}
+
+// Generar poema segons sentiment i estil
+function generarPoema(text, puntuacio, estil) {
+    let versos=[], titol="";
+    // Escala suau amb interpolació
+    if (puntuacio>=3){titol="Oda a l'Alegria"; versos=["El sol dansa al teu cor,","el vent canta amb tu,","riu de llum s'estén,","i la teva ànima brilla."];}
+    else if (puntuacio>=1){titol="Sonet del Benestar"; versos=["La calma flueix,","un sospir suau recorre el dia,","tot sembla més lleu,","i el moment és música."];}
+    else if (puntuacio>=-1){titol="Balada del Present"; versos=["Les paraules flueixen suaus,","ni gran goig ni clots,","un equilibri precís","en el silenci amable."];}
+    else if (puntuacio>=-3){titol="Elegia del Desassossec"; versos=["Sento una ombra en el teu dir,","fred suau que toca el cor,","però la llum espera,","i torna a guiar el teu pas."];}
+    else {titol="Càntic de la Melangia"; versos=["Com pluja persistent,","la tristesa mulla el parlar,","però el sol sempre torna,","i amb ell, l'esperança brilla."];}
+    
+    // Afegir emoji segons sentiment
+    let prefix = (puntuacio>2)?"☀️ ":puntuacio<-2?"🌧️ ":"";
+    return prefix + titol + "\n\n" + versos.join("\n") + "\n\n— Robot Poeta";
+}
+
+function start() {
+    document.getElementById("estat").innerText = "🎧 Escoltant el teu cor, no només la teva veu…";
+    recognition.start();
+}
+
+recognition.onresult = function(e){
+    const text = e.results[0][0].transcript;
+    document.getElementById("estat").innerText = "✅ Veu detectada";
+    document.getElementById("resultat").innerText = text;
+    const puntuacio = analitzarSentiment(text);
+    const estil = document.getElementById("estilPoema").value;
+
+    // Actualitzar sentiment
+    const elemS = document.getElementById("sentiment");
+    let cls="neutral", txt="😐 Sentiment neutral";
+    if(puntuacio>3){cls="positiu"; txt="✨ Sentiment molt positiu";}
+    else if(puntuacio>0){cls="positiu"; txt="😊 Sentiment positiu";}
+    else if(puntuacio>-3){cls="negatiu"; txt="😔 Sentiment negatiu";}
+    else{cls="negatiu"; txt="😢 Sentiment molt negatiu";}
+    txt += ` (Puntuació: ${puntuacio})`;
+    elemS.innerText = txt;
+    elemS.className = "sentiment-box "+cls;
+
+    poemaActual = generarPoema(text, puntuacio, estil);
+
+    // Mostrar poema amb fade-in per versos
+    const linies = poemaActual.split('\n');
+    let htmlPoema='';
+    linies.forEach(l=>{
+        if(l.trim()==='') htmlPoema+='<div style="height:10px;"></div>';
+        else if(l.startsWith('—')) htmlPoema+='<div class="signatura">'+l+'</div>';
+        else htmlPoema+='<div class="vers">'+l+'</div>';
+    });
+    const elemPoema=document.getElementById("poema");
+    elemPoema.innerHTML=htmlPoema;
+
+    // Animar versos
+    const versosEls = elemPoema.querySelectorAll('.vers');
+    versosEls.forEach((v,i)=>setTimeout(()=>v.style.opacity=1,i*300));
+
+    // Reproduir poema automàticament
+    setTimeout(()=>parla(poemaActual),800);
+};
+
+recognition.onerror = function(e){
+    document.getElementById("estat").innerText = "❌ Error: "+e.error;
+};
+</script>
+</body>
+</html>
