@@ -1,16 +1,36 @@
 
 <!DOCTYPE html>
 <html lang="ca">
+    <!-- Lang, significa language, la llegngua que utilitza el document -->
 <head>
     <meta charset="UTF-8">
+    <!-- Meta, és metainformació que es informació sobre la pàgina web. Charset, conjunt de caracters que utilitzem 
+    i UTF-8, si es unicode transformation format de 8 bits que permet accensts, dieresi, ñ,ç, i també caracters àrabs, xinesos-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Disseny  adaptatiu o responsive designe, és a dir, s'adapta el contingut a la pantalla a l'ample del dispositiu (device with).-->
     <title>Reconeixement de Veu amb Anàlisi de Sentiments</title>
+    <--!Títol de la pestanya, no és el títol del contingut de la web -->
     <style>
+        /* En llenguatge CSS (Cascading Style Sheets o full d'estil en cascada) que vindria a ser com el look de la pàgina web
+        Com és sempre el CCS? Sí, és sempre etiquetanhtml{propietat1:valor1;propietat2:valor;}
+        El body és tot el contingut de la pàgina. Font-family és el tipus de lletra i buscarà arial i si no la troba
+        buscarà qualsevol sans-serif (sense floritures a les lletres). Hi ha 3 grans grups de lletres que són serif,
+        sans-serif i monocode.
+        Serif: amb floriures. Monocode: amplada de cada lletra sempre la mateixa i això i fa per codi.El tipus de lletra més comú és Time New Roman.
+        Sanas-serif: Aria és la lletra més comuna.
+        Monocode/Monospace: El més comú és Courier New.
+        */
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
+            /*Amplada màxima*/
             margin: 0 auto;
+            /*Margin és el marge exterior*/
             padding: 20px;
+            /*Padding és el marge interior*/
+           /* Tan margin como padding podem tenir 1,2,3 o 4 propietats de pixels si té un número de pixels afectara a totes direccions,
+            si té dos números,és a dalt i abaix, per exemple, 0 auto farà 0 a falt i abaix i auto dreta i esquerra. Si tenim tres números, 
+            la primera és a dalt, la segona és dreta i esquerra i la última és dreta i esquerra*/
         }
         
         button {
